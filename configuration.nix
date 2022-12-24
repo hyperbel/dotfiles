@@ -54,8 +54,6 @@
     };
   }; 
 
-  services.blueman.enable = true;
-  
 
   # Configure keymap in X11
   # services.xserver.layout = "us";
@@ -68,7 +66,17 @@
   services.printing.enable = true;
 
   # enable bluetooth
-  hardware.bluetooth.enable = true;
+  hardware.bluetooth = {
+    enable = true;
+    
+  };
+
+  systemd.services.bluetooth.serviceConfig.ExecStart = [
+      ""
+      "${pkgs.bluez}/libexec/bluetooth/bluetoothd -f /etc/bluetooth/main.conf"
+  ];
+
+  services.blueman.enable = true;
 
   # Enable sound.
   hardware.enableAllFirmware = true;
@@ -76,18 +84,10 @@
   sound.enable = true;
   hardware.pulseaudio = {
     enable = true;
+    support32Bit = true;
     package = pkgs.pulseaudioFull;
     # extraModules = [ pkgs.pulseaudio-modules-bt ];
-    configFile = pkgs.writeText "default.pa" ''
-      load-module module-bluetooth-policy
-      load-module module-bluetooth-discover
-      ## module fails to load with 
-      ##   module-bluez5-device.c: Failed to get device path from module arguments
-      ##   module.c: Failed to load module "module-bluez5-device" (argument: ""): initialization failed.
-      load-module module-bluez5-device
-      load-module module-bluez5-discover
-    '';
-    
+    extraConfig = "load-module module-combine-sink";
   };
 
   nixpkgs.config = {
