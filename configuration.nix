@@ -108,6 +108,8 @@
       zulip
       element-desktop
       keepassxc
+      spotify
+      spotifywm
     ];
   };
 
@@ -122,6 +124,8 @@
     bluezFull
     xorg.xrandr
     arandr
+    python3
+    sqlite
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
@@ -156,5 +160,5 @@
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
   system.stateVersion = "22.11"; # Did you read the comment?
 
+  programs.steam.enable = true;
 }
-
