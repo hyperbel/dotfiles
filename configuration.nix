@@ -13,6 +13,7 @@
   # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
+  boot.initrd.kernelModules = [ "amdgpu" ];
 
   # networking.hostName = "nixos"; # Define your hostname.
   # Pick only one of the below networking options.
@@ -37,7 +38,8 @@
   # Enable the X11 windowing system.
   services.xserver = {
     enable = true;
-
+    videoDrivers = [ "amdgpu" ];
+    
   
     displayManager = {
         sddm.enable = true;
@@ -54,6 +56,19 @@
     };
   }; 
 
+  hardware.opengl = {
+    extraPackages = with pkgs; [
+      rocm-opencl-icd
+      rocm-opencl-runtime
+      amdvlk
+    ];
+    extraPackages32 = with pkgs; [
+      driversi686Linux.amdvlk
+    ];
+
+    driSupport = true;
+    driSupport32Bit = true;
+  };
 
   # Configure keymap in X11
   # services.xserver.layout = "us";
@@ -110,6 +125,11 @@
       keepassxc
       spotify
       spotifywm
+      virt-manager
+      sqlite
+      xorg.xrandr
+      arandr
+      python3
     ];
   };
 
@@ -122,10 +142,8 @@
     git
     ungoogled-chromium
     bluezFull
-    xorg.xrandr
-    arandr
-    python3
-    sqlite
+    mesa
+    clinfo
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
