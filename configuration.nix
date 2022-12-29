@@ -130,6 +130,7 @@
       xorg.xrandr
       arandr
       python3
+      libreoffice
     ];
   };
 
