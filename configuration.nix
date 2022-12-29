@@ -131,6 +131,7 @@
       arandr
       python3
       libreoffice
+      mupdf
     ];
   };
 
