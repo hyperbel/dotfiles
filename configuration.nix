@@ -11,9 +11,12 @@
     ];
 
   # Use the systemd-boot EFI boot loader.
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
-  boot.initrd.kernelModules = [ "amdgpu" ];
+  boot = {
+    loader.systemd-boot.enable = true;
+    loader.efi.canTouchEfiVariables = true; 
+    initrd.kernelModules = [ "amdgpu" ];
+    supportedFilesystems = [ "ntfs" ];
+  };
 
   # networking.hostName = "nixos"; # Define your hostname.
   # Pick only one of the below networking options.
@@ -112,10 +115,14 @@
   # Enable touchpad support (enabled default in most desktopManager).
   services.xserver.libinput.enable = true;
 
+  virtualisation.libvirtd.enable = true;
+  programs.dconf.enable = true;
+  
+
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.xyz = {
     isNormalUser = true;
-    extraGroups = [ "wheel" "sound" "pulse" "audio" ]; # Enable ‘sudo’ for the user.
+    extraGroups = [ "wheel" "sound" "pulse" "audio" "libvirtd" ]; # Enable ‘sudo’ for the user.
     initialPassword = "abc";
     packages = with pkgs; [
       firefox
@@ -132,6 +139,8 @@
       python3
       libreoffice
       mupdf
+      cura
+      freecad
     ];
   };
 
@@ -146,6 +155,7 @@
     bluezFull
     mesa
     clinfo
+    virt-manager
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
