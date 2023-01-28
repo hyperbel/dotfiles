@@ -113,7 +113,16 @@
   # Enable touchpad support (enabled default in most desktopManager).
   services.xserver.libinput.enable = true;
 
-  virtualisation.libvirtd.enable = true;
+  virtualisation = {
+    libvirtd.enable = true;
+    docker = {
+      enable = true;
+      rootless = {
+        enable = true;
+	setSocketVariable = true;
+      };
+    };
+  };
   
   
   programs = {
@@ -131,7 +140,7 @@
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.xyz = {
     isNormalUser = true;
-    extraGroups = [ "wheel" "sound" "pulse" "audio" "libvirtd" ]; # Enable ‘sudo’ for the user.
+    extraGroups = [ "wheel" "sound" "pulse" "audio" "libvirtd" "docker" ]; # Enable ‘sudo’ for the user.
     initialPassword = "abc";
     packages = with pkgs; [
       firefox
@@ -171,6 +180,7 @@
     virt-manager
     neovim
   ];
+
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
