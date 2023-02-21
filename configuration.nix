@@ -5,6 +5,8 @@
 { config, pkgs, ... }:
 
 {
+
+  nix.settings.experimental-features = [ "nix-command" "flakes" ];
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
@@ -94,6 +96,10 @@
       "${pkgs.bluez}/libexec/bluetooth/bluetoothd -f /etc/bluetooth/main.conf"
   ];
 
+  systemd.tmpfiles.rules = [
+    "L+	/opt/rocm/hip	-	-	-	-	${pkgs.hip}"
+  ];
+
   services.blueman.enable = true;
 
   # Enable sound.
@@ -164,6 +170,8 @@
       neovim
       nodejs
       gh
+      docker 
+      appimage-run
     ];
   };
 
@@ -179,6 +187,7 @@
     clinfo
     virt-manager
     neovim
+    hip
   ];
 
 
