@@ -172,6 +172,7 @@
       gh
       docker 
       appimage-run
+      prismlauncher
     ];
   };
 
