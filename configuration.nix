@@ -173,6 +173,7 @@
       docker 
       appimage-run
       prismlauncher
+      eclipses.eclipse-java
     ];
   };
 
