@@ -162,7 +162,6 @@
       arandr
       python3
       libreoffice
-      mupdf
       cura
       freecad
       pciutils
