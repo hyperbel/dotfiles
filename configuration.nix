@@ -173,6 +173,7 @@
       appimage-run
       prismlauncher
       eclipses.eclipse-java
+      youtube-dl
     ];
   };
 
