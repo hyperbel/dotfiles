@@ -18,8 +18,8 @@ local hotkeys_popup = require("awful.hotkeys_popup")
 -- when client with a matching name is opened:
 require("awful.hotkeys_popup.keys")
 
--- keymap
-local keymap_de = true
+-- keymap for switching between german and english keyboard layout
+local keymap_de = false
 
 -- {{{ Error handling
 -- Check if awesome encountered an error during startup and fell back to
@@ -293,6 +293,23 @@ globalkeys = gears.table.join(
 	    end
     end,
     	      {description = "swap keymap", group = "custom"}),
+   awful.key({ }, "XF86AudioPlay", function () 
+       awful.util.spawn("dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.PlayPause", false) 
+   end,
+              {description = "Play/Pause spotify", group = "custom"}),
+   awful.key({ }, "XF86AudioNext", function () 
+       awful.util.spawn("dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Next", false)
+   end,
+              {description = "Skip Song in Spotify", group = "custom"}),
+   awful.key({ }, "XF86AudioPrev", function ()
+       awful.util.spawn("dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Previous", false)
+   end,
+              {description = "Previous Song in Spotify", group = "custom"}),
+
+   awful.key({ }, "XF86AudioStop", function ()
+       awful.util.spawn("dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Stop", false)
+   end,
+              {description = "Stop Song in Spotify", group = "custom"}), 
 
     awful.key({ modkey,           }, "l",     function () awful.tag.incmwfact( 0.05)          end,
               {description = "increase master width factor", group = "layout"}),
