@@ -1,26 +1,25 @@
-local use = require('packer').use
-require('packer').startup(function()
-	use 'wbthomason/packer.nvim'
-	use 'neovim/nvim-lspconfig'
-	use 'nvim-lua/completion-nvim'
-	use 'nvim-lua/lsp-status.nvim'
-	use 'nvim-lua/lsp_extensions.nvim'
-	use 'github/copilot.vim'
-	use 'LnL7/vim-nix'
-	use 'kkvh/vim-docker-tools'
-	use 'williamboman/nvim-lsp-installer'
-	use 'nvim-lua/plenary.nvim'
-	use 'nvim-lua/telescope.nvim'
-	use 'hrsh7th/cmp-nvim-lsp'
-	use 'hrsh7th/cmp-buffer'
-	use 'hrsh7th/cmp-path'
-	use 'hrsh7th/cmp-cmdline'
-	use 'hrsh7th/nvim-cmp'
-    use 'hrsh7th/cmp-vsnip'
-    use 'hrsh7th/vim-vsnip'
-    use 'elixir-editors/vim-elixir'
-    use 'elixir-tools/elixir-tools.nvim'
-end)
+require('lazy').setup({
+	'wbthomason/packer.nvim',
+	'neovim/nvim-lspconfig',
+	'nvim-lua/completion-nvim',
+	'nvim-lua/lsp-status.nvim',
+	'nvim-lua/lsp_extensions.nvim',
+	'github/copilot.vim',
+	'LnL7/vim-nix',
+	'kkvh/vim-docker-tools',
+	'williamboman/nvim-lsp-installer',
+	'nvim-lua/plenary.nvim',
+	'nvim-lua/telescope.nvim',
+	'hrsh7th/cmp-nvim-lsp',
+	'hrsh7th/cmp-buffer',
+	'hrsh7th/cmp-path',
+	'hrsh7th/cmp-cmdline',
+	'hrsh7th/nvim-cmp',
+	'hrsh7th/cmp-vsnip',
+	'hrsh7th/vim-vsnip',
+	'elixir-editors/vim-elixir',
+	'elixir-tools/elixir-tools.nvim'
+})
 
 -- vim options from init.vim
 vim.opt.termguicolors = true
