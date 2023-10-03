@@ -12,11 +12,15 @@ super + Return
 
 # program launcher
 super + p
-	rofi -show run
+	rofi -show drun
 
 # make sxhkd reload its configuration files:
 super + Escape
 	pkill -USR1 -x sxhkd
+
+# suspend + lock
+super + shift + Escape
+    systemctl suspend && slock
 
 #
 # bspwm hotkeys
@@ -79,7 +83,7 @@ super + {grave,Tab}
 	bspc {node,desktop} -f last
 
 # focus the older or newer node in the focus history
-super + {o,i}
+super + {u,o}
 	bspc wm -h off; \
 	bspc node {older,newer} -f; \
 	bspc wm -h on
