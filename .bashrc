@@ -34,5 +34,10 @@ if [[ -r /usr/share/bash-completion/bash_completion ]]; then
 fi
 export PATH=$PATH:/home/lia/.spicetify:/home/lia/.cargo/bin
 
+# vi keybindings
+set -o vi
+bind -m vi-command 'Control-l: clear-screen'
+bind -m vi-insert 'Control-l: clear-screen'
+
 # tmux
 if [ -t 0 ] && [[ -z $TMUX ]] && [[ $- = *i* ]]; then exec tmux; fi
