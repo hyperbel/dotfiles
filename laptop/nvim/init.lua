@@ -15,7 +15,7 @@ require('lazy').setup({
 	'hrsh7th/cmp-cmdline',
 	'hrsh7th/nvim-cmp',
 	'hrsh7th/cmp-vsnip',
-    --'hrsh7th/vim-vsnip',
+    'integralist/vim-mypy'
 })
 
 -- vim options from init.vim
@@ -81,5 +81,5 @@ require'lspconfig'.gopls.setup{capabilities = capabilities}
 require'lspconfig'.sqlls.setup{capabilities = capabilities}
 require'lspconfig'.jdtls.setup{capabilities = capabilities}
 require'lspconfig'.ccls.setup{capabilities = capabilities}
-require'lspconfig'.jedi_language_server.setup{capabilities = capabilities}
 require'lspconfig'.omnisharp.setup{capabilities = capabilities}
+require'lspconfig'.pyright.setup{capabilities = capabilities}
