@@ -1,28 +1,10 @@
-local function bootstrap_pckr()
-  local pckr_path = vim.fn.stdpath("data") .. "/pckr/pckr.nvim"
-
-  if not vim.loop.fs_stat(pckr_path) then
-    vim.fn.system({
-      'git',
-      'clone',
-      "--filter=blob:none",
-      'https://github.com/lewis6991/pckr.nvim',
-      pckr_path
-    })
-  end
-
-  vim.opt.rtp:prepend(pckr_path)
-end
-
-bootstrap_pckr()
-require('pckr').add({
+require('lazy').setup({
 	'wbthomason/packer.nvim',
 	'neovim/nvim-lspconfig',
 	'nvim-lua/completion-nvim',
 	'nvim-lua/lsp-status.nvim',
 	'nvim-lua/lsp_extensions.nvim',
 	'github/copilot.vim',
-	'LnL7/vim-nix',
 	'kkvh/vim-docker-tools',
 	'williamboman/nvim-lsp-installer',
 	'nvim-lua/plenary.nvim',
@@ -33,10 +15,7 @@ require('pckr').add({
 	'hrsh7th/cmp-cmdline',
 	'hrsh7th/nvim-cmp',
 	'hrsh7th/cmp-vsnip',
-	'hrsh7th/vim-vsnip',
-	'elixir-editors/vim-elixir',
-	'elixir-tools/elixir-tools.nvim',
-	'vimwiki/vimwiki'
+    'integralist/vim-mypy'
 })
 
 -- vim options from init.vim
@@ -102,11 +81,5 @@ require'lspconfig'.gopls.setup{capabilities = capabilities}
 require'lspconfig'.sqlls.setup{capabilities = capabilities}
 require'lspconfig'.jdtls.setup{capabilities = capabilities}
 require'lspconfig'.ccls.setup{capabilities = capabilities}
-require'lspconfig'.pyright.setup{capabilities = capabilities}
 require'lspconfig'.omnisharp.setup{capabilities = capabilities}
-
-
-local elixir = require("elixir")
-elixir.setup({
-    cmd = { "/home/lia/code/git/gh/elixir-ls/release/language_server.sh" },
-})
+require'lspconfig'.pyright.setup{capabilities = capabilities}
