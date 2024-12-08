@@ -4,8 +4,6 @@ require('lazy').setup({
 	'nvim-lua/completion-nvim',
 	'nvim-lua/lsp-status.nvim',
 	'nvim-lua/lsp_extensions.nvim',
-	'github/copilot.vim',
-	'LnL7/vim-nix',
 	'kkvh/vim-docker-tools',
 	'williamboman/nvim-lsp-installer',
 	'nvim-lua/plenary.nvim',
@@ -16,10 +14,11 @@ require('lazy').setup({
 	'hrsh7th/cmp-cmdline',
 	'hrsh7th/nvim-cmp',
 	'hrsh7th/cmp-vsnip',
-	'hrsh7th/vim-vsnip',
-	'elixir-editors/vim-elixir',
-	'elixir-tools/elixir-tools.nvim'
+	'integralist/vim-mypy',
+    'easymotion/vim-easymotion',
+    'yorik1984/cobol.nvim'
 })
+
 
 -- vim options from init.vim
 vim.opt.termguicolors = true
@@ -34,12 +33,6 @@ vim.opt.smartindent = true
 vim.opt.autoindent = true
 vim.opt.splitright = true
 vim.opt.splitbelow = true
-
--- telescope
-local builtin = require('telescope.builtin')
---vim.keymap.set('n', ' ', builtin.find_files {})
-vim.cmd("nnoremap <Space> <cmd>Telescope find_files<CR>")
--- vim.cmd("nnoremap <C-Space> <cmd>20 split term://bash<CR>")
 
 
 -- auto complete
@@ -76,19 +69,36 @@ cmp.setup({
 })
 
 local capabilities = require('cmp_nvim_lsp').default_capabilities()
-
 -- lsp
 require'nvim-lsp-installer'.setup{capabilities = capabilities}
 require'lspconfig'.rust_analyzer.setup{capabilities = capabilities}
 require'lspconfig'.gopls.setup{capabilities = capabilities}
 require'lspconfig'.sqlls.setup{capabilities = capabilities}
 require'lspconfig'.jdtls.setup{capabilities = capabilities}
-require'lspconfig'.ccls.setup{capabilities = capabilities}
-require'lspconfig'.jedi_language_server.setup{capabilities = capabilities}
+require'lspconfig'.clangd.setup{capabilities = capabilities}
 require'lspconfig'.omnisharp.setup{capabilities = capabilities}
+require'lspconfig'.pyright.setup{capabilities = capabilities}
+require'lspconfig'.tsserver.setup{capabilities = capabilities}
+-- require'lspconfig'.hls.setup{capabilities = capabilities}
 
 
-local elixir = require("elixir")
-elixir.setup({
-    cmd = { "/home/lia/code/git/gh/elixir-ls/release/language_server.sh" },
-})
+-- set leader required for easymotion
+vim.cmd("map <Space><Space> <Plug>(easymotion-prefix)")
+
+
+-- cobol
+-- local cobol = require'cobol.nvim';
+-- cobol.setup{}
+
+
+function diskrete_convert()
+    vim.cmd("s/and/∧/g")
+    vim.cmd("s/or/∨/g")
+    vim.cmd("s/not/¬/g")
+    vim.cmd("s/->/→/g")
+    vim.cmd("s/<>/↔/g")
+    vim.cmd("s/=>/⇒/g")
+    vim.cmd("s/==/⇔/g")
+end
+
+vim.keymap.set('n', '<Space>_', diskrete_convert, {desc="Diskrete strukturen helper"})
