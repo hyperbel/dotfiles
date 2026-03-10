@@ -1,5 +1,5 @@
 # dotfiles
-my dotfiles (currently arch btw.)
+my dotfiles
 
 # rc.lua
 this file is for awesomewm. so it should live in `~/.config/awesome/`
